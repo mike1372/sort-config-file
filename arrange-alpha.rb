@@ -35,10 +35,20 @@ def compile(data)
   client_configs
 end
 
+# Sort each entry by its first line
+def sort(entries)
+  entries.sort_by! { |entry| entry[0]}
+end
 
+# Write the sorted contents back to the file
+def put_file_data
+
+end
 
 data = get_file_data
 entries = compile(data)
+sorted = sort(entries)
+#put_file_data(sorted)
 
 binding.pry
 
