@@ -2,7 +2,8 @@ require 'pry'
 
 # Get the file contents and read into an array of lines
 def get_file_data
-  File.readlines('config')
+  puts 'Reading file data...'
+  File.readlines('config-test')
 end
 
 # Remove any leading whitespace
@@ -18,7 +19,6 @@ def remove_space
   end
 end
 
-
 # Run through the array of lines and retrieve the host blocks, place them into hashes
 def compile(data)
   puts 'Compiling file data...'
@@ -32,24 +32,32 @@ def compile(data)
       entry = []
     end
   end
+  client_configs << entry
   client_configs
 end
 
 # Sort each entry by its first line
 def sort(entries)
-  entries.sort_by! { |entry| entry[0]}
+  puts 'Sorting entries...'
+  entries.sort_by! { |entry| entry[0] }
 end
 
 # Write the sorted contents back to the file
-def put_file_data
-
+def put_file_data(sorted)
+  puts 'Writing to file...'
+  sorted.each do |entry|
+    entry.each do |line|
+      File.write('./config', 'testing')
+    end
+    File.write('config', "\n")
+  end
 end
 
 data = get_file_data
 entries = compile(data)
 sorted = sort(entries)
-#put_file_data(sorted)
+put_file_data(sorted)
 
-binding.pry
+#binding.pry
 
 puts 'Finished'
